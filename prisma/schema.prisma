@@ -1,0 +1,144 @@
+// CapitalBridge — data model
+// SQLite via Prisma for zero-infra local/demo persistence. Written in
+// Postgres-compatible syntax; swapping `provider` + `DATABASE_URL` is the
+// only change needed to move to Postgres (see docs/DECISIONS.md, D2).
+//
+// SQLite has no native array/enum column type, so list-valued fields
+// (sectors, geography) are stored as JSON-encoded strings and
+// (de)serialized in src/lib/json-list.ts. This is a documented
+// simplification, not an oversight — see docs/DATA_MODEL.md.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  FOUNDER
+  INVESTOR
+  ADMIN
+}
+
+enum ListingStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum Stage {
+  PRE_SEED
+  SEED
+  SERIES_A
+  SERIES_B_PLUS
+  GROWTH
+}
+
+enum RaiseType {
+  SAFE
+  CONVERTIBLE_NOTE
+  EQUITY
+  REVENUE_SHARE
+}
+
+enum InterestStatus {
+  INTERESTED
+  PASSED
+}
+
+model User {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  passwordHash   String
+  name           String
+  role           Role
+  createdAt      DateTime        @default(now())
+
+  listings       Listing[]
+  investorProfile InvestorProfile?
+  interests      Interest[]
+  listingViews   ListingView[]
+}
+
+model InvestorProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  thesis          String
+  /// JSON string array, e.g. ["fintech","climatetech"]
+  sectorsJson     String
+  /// JSON string array, e.g. ["seed","series_a"]
+  stagesJson      String
+  checkSizeMinUsd Int
+  checkSizeMaxUsd Int
+  /// JSON string array, e.g. ["us","eu"]
+  geographyJson   String
+  /// Demo-only flag. NOT a real KYC/accreditation check — see docs/LIMITATIONS.md
+  verifiedDemo    Boolean  @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Listing {
+  id               String        @id @default(cuid())
+  founderId        String
+  founder          User          @relation(fields: [founderId], references: [id], onDelete: Cascade)
+
+  companyName      String
+  tagline          String
+  description      String
+  sectorTier1      String
+  /// JSON string array of Tier-2 tags
+  sectorTier2Json  String
+  stage            Stage
+  raiseType        RaiseType
+  askAmountUsd     Int
+  currency         String        @default("USD")
+  geography        String
+  teamSize         Int?
+  tractionSummary  String?
+  websiteUrl       String?
+  status           ListingStatus @default(DRAFT)
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  interests        Interest[]
+  views            ListingView[]
+
+  @@index([status])
+  @@index([sectorTier1])
+}
+
+model Interest {
+  id          String         @id @default(cuid())
+  listingId   String
+  listing     Listing        @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  investorId  String
+  investor    User           @relation(fields: [investorId], references: [id], onDelete: Cascade)
+
+  /// Rule-based compatibility score (0-100) at time of action. Not AI/ML — see docs/DECISIONS.md D3.
+  score       Int
+  status      InterestStatus @default(INTERESTED)
+  createdAt   DateTime       @default(now())
+
+  @@unique([listingId, investorId])
+}
+
+/// Real engagement tracking (not seeded demo data) — each listing detail
+/// page view is logged so founder dashboards show genuine counts.
+model ListingView {
+  id        String   @id @default(cuid())
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  viewerId  String?
+  viewer    User?    @relation(fields: [viewerId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+
+  @@index([listingId])
+}

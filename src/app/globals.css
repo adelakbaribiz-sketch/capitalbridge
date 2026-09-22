@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/*
+  Visual identity: capital-markets / editorial finance, not generic SaaS.
+  - "Fraunces" (serif, some optical weight) for display headings — trust
+    and a bit of editorial character, avoids the generic AI-dashboard look.
+  - "Inter" for UI body text and data-dense tables.
+  - Deep navy as the primary ink color, a warm paper background instead of
+    pure white, emerald for positive/growth signals, amber reserved for
+    "promising" match band and attention states. No gradients, no glass.
+*/
+
+:root {
+  --color-paper: #f8f6f1;
+  --color-paper-raised: #ffffff;
+  --color-ink: #14213d;
+  --color-ink-muted: #4b5668;
+  --color-navy: #0b1e36;
+  --color-navy-soft: #16304f;
+  --color-border: #e4ddcf;
+  --color-emerald: #0f6b4f;
+  --color-emerald-soft: #e3efe9;
+  --color-amber: #a9720c;
+  --color-amber-soft: #f5ead2;
+  --color-rose: #9c3b3b;
+  --color-rose-soft: #f4e3e1;
+  --color-slate-soft: #eceef2;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-raised: var(--color-paper-raised);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-navy: var(--color-navy);
+  --color-navy-soft: var(--color-navy-soft);
+  --color-border: var(--color-border);
+  --color-emerald: var(--color-emerald);
+  --color-emerald-soft: var(--color-emerald-soft);
+  --color-amber: var(--color-amber);
+  --color-amber-soft: var(--color-amber-soft);
+  --color-rose: var(--color-rose);
+  --color-rose-soft: var(--color-rose-soft);
+  --color-slate-soft: var(--color-slate-soft);
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+::selection {
+  background: var(--color-emerald-soft);
+  color: var(--color-ink);
+}
