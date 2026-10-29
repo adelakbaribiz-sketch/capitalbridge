@@ -8,6 +8,8 @@ A founder ⇄ investor marketplace MVP: founders publish structured fundraising 
 set an investment thesis and get a transparent, explainable compatibility score against every
 listing, browse/filter/compare, and record interest.
 
+![Explainable match score — sector, stage, check-size and geography fit for one listing](docs/screenshots/match-breakdown.png)
+
 Built from a Technical Project Dossier for "CapitalBridge" — see
 [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) for how a 20-feature, multi-jurisdiction
 architecture memo became this scoped, honestly-labeled MVP.
@@ -44,10 +46,15 @@ size, geography) drove the number, not a black-box "AI recommendation."
 |---|---|
 | ![Listing detail](docs/screenshots/listing-detail.png) | ![Compare](docs/screenshots/compare.png) |
 
-These four are the signed-out views (real screenshots, not mockups). The match-score
-breakdown, founder dashboard, investor dashboard, and admin panel only render for a signed-in
-session, so they aren't captured here — see [docs/DEMO.md](docs/DEMO.md) to see them live in
-under a minute with the seeded demo accounts.
+| Investor dashboard (signed in) |
+|---|
+| ![Investor dashboard with top matches ranked against the investor's thesis](docs/screenshots/investor-dashboard.png) |
+
+All of these are real screenshots of the app running locally, not mockups. The investor dashboard
+and the match-score view at the top of this README were captured signed in as the seeded demo
+investor; every company, investor and number is fictional seed data.
+The founder dashboard and admin panel are not pictured — see [docs/DEMO.md](docs/DEMO.md) to see
+them live in under a minute with the seeded demo accounts.
 
 ## Architecture
 
