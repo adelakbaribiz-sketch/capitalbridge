@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
+import { Surface } from "@/components/design-system/surface";
 
 export function StatTile({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
-    <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)] p-4">
+    <Surface className="p-4">
       <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-ink-muted)]">{label}</p>
-      <p className="font-display mt-1 text-2xl text-[var(--color-navy)]">{value}</p>
+      <p className="font-display mt-1 text-2xl tabular-nums text-[var(--color-navy)]">{value}</p>
       {hint && <p className="mt-1 text-xs text-[var(--color-ink-muted)]">{hint}</p>}
-    </div>
+    </Surface>
   );
 }
 

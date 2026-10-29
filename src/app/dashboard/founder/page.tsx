@@ -6,6 +6,8 @@ import { StatTile, StatusBadge, EmptyState, formatUsdCompact } from "@/component
 import { ListingStatusControls } from "@/components/listing-status-controls";
 import { ViewsChart } from "@/components/views-chart";
 import { stageLabel } from "@/lib/taxonomy";
+import { ButtonLink } from "@/components/design-system/button";
+import { ElevatedSurface, Surface } from "@/components/design-system/surface";
 
 export default async function FounderDashboardPage() {
   const session = await getSession();
@@ -48,26 +50,27 @@ export default async function FounderDashboardPage() {
             Views and interest below are real counts from this database, not seeded numbers.
           </p>
         </div>
-        <Link href="/listings/new" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
-          New listing
-        </Link>
+        <ButtonLink href="/listings/new">New listing</ButtonLink>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <StatTile label="Published listings" value={String(published)} />
-        <StatTile label="Total views" value={String(totalViews)} hint="Logged per listing-detail page load" />
-        <StatTile label="Expressed interest" value={String(totalInterest)} />
-      </div>
-
-      {chartData.length > 0 && (
-        <div className="mt-6 rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)] p-5">
-          <p className="text-sm font-medium text-[var(--color-ink)]">Views by day</p>
-          <div className="mt-2">
-            <ViewsChart data={chartData} />
-          </div>
+      {/* Primary insight: KPIs + trend live together as one elevated panel. */}
+      <ElevatedSurface className="mt-6 p-5">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <StatTile label="Published listings" value={String(published)} />
+          <StatTile label="Total views" value={String(totalViews)} hint="Logged per listing-detail page load" />
+          <StatTile label="Expressed interest" value={String(totalInterest)} />
         </div>
-      )}
+        {chartData.length > 0 && (
+          <div className="mt-6">
+            <p className="text-sm font-medium text-[var(--color-ink)]">Views by day</p>
+            <div className="mt-2">
+              <ViewsChart data={chartData} />
+            </div>
+          </div>
+        )}
+      </ElevatedSurface>
 
+      {/* Secondary: the working list (actions per row). */}
       <div className="mt-8">
         <h2 className="font-display text-xl text-[var(--color-navy)]">Your listings</h2>
         {listings.length === 0 ? (
@@ -75,15 +78,11 @@ export default async function FounderDashboardPage() {
             <EmptyState
               title="No listings yet"
               description="Publish your first raise to start appearing in investor searches and match feeds."
-              action={
-                <Link href="/listings/new" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white">
-                  Create a listing
-                </Link>
-              }
+              action={<ButtonLink href="/listings/new">Create a listing</ButtonLink>}
             />
           </div>
         ) : (
-          <div className="mt-4 divide-y divide-[var(--color-border)] rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)]">
+          <Surface className="mt-4 divide-y divide-[var(--color-border)]">
             {listings.map((listing) => (
               <div key={listing.id} className="flex flex-wrap items-center justify-between gap-4 p-4">
                 <div>
@@ -101,7 +100,7 @@ export default async function FounderDashboardPage() {
                 <ListingStatusControls listingId={listing.id} status={listing.status} />
               </div>
             ))}
-          </div>
+          </Surface>
         )}
       </div>
     </div>

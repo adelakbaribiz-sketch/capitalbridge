@@ -30,6 +30,18 @@
      that still carries white text, so fills get their own token. */
   --color-navy-fill: #0b1e36;
   --color-hero: #0b1e36;
+  --color-focus-ring: #225bbe;
+
+  /* Elevation scale — spatial depth system (docs/DESIGN_SYSTEM.md).
+     Used semantically (hero stats, primary actions), not on every card. */
+  --shadow-raised: 0 1px 2px rgba(20, 33, 61, 0.06), 0 1px 1px rgba(20, 33, 61, 0.04);
+  --shadow-elevated: 0 4px 12px rgba(20, 33, 61, 0.08), 0 2px 4px rgba(20, 33, 61, 0.05);
+  --shadow-floating: 0 12px 24px rgba(20, 33, 61, 0.12), 0 4px 8px rgba(20, 33, 61, 0.06);
+  --shadow-modal: 0 24px 48px rgba(11, 30, 54, 0.28), 0 8px 16px rgba(11, 30, 54, 0.12);
+
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /*
@@ -55,6 +67,12 @@
   --color-rose: #e08585;
   --color-rose-soft: #3a2020;
   --color-slate-soft: #202a37;
+  --color-focus-ring: #6b9aea;
+
+  --shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-elevated: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --shadow-floating: 0 16px 32px rgba(0, 0, 0, 0.55);
+  --shadow-modal: 0 24px 56px rgba(0, 0, 0, 0.65);
 }
 
 @theme inline {
@@ -76,12 +94,17 @@
   --color-hero: var(--color-hero);
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-inter);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-elevated: var(--shadow-elevated);
+  --shadow-floating: var(--shadow-floating);
+  --shadow-modal: var(--shadow-modal);
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color var(--motion-base) var(--motion-ease), color var(--motion-base) var(--motion-ease);
 }
 
 .font-display {
@@ -91,4 +114,25 @@ body {
 ::selection {
   background: var(--color-emerald-soft);
   color: var(--color-ink);
+}
+
+/* Visible, brand-colored keyboard focus ring everywhere — default browser
+   outlines get lost against the paper background. */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Section 17/34: users who ask for reduced motion get it — no lift, no
+   scale, no slide transitions, everywhere in the app at once. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 import { expressInterestAction } from "@/lib/actions/listings";
+import { Button } from "@/components/design-system/button";
 
 export function ExpressInterestButton({
   listingId,
@@ -21,13 +22,8 @@ export function ExpressInterestButton({
   }
 
   return (
-    <button
-      type="button"
-      disabled={isPending}
-      onClick={() => startTransition(() => expressInterestAction(listingId))}
-      className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
-    >
+    <Button disabled={isPending} onClick={() => startTransition(() => expressInterestAction(listingId))}>
       {isPending ? "Recording…" : "Express interest"}
-    </button>
+    </Button>
   );
 }

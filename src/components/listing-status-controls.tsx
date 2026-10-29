@@ -2,9 +2,7 @@
 
 import { useTransition } from "react";
 import { setListingStatusAction } from "@/lib/actions/listings";
-
-const btnClass =
-  "rounded-md border border-[var(--color-border)] px-2.5 py-1 text-xs font-medium text-[var(--color-ink)] transition hover:border-[var(--color-navy)] disabled:opacity-50";
+import { Button } from "@/components/design-system/button";
 
 export function ListingStatusControls({ listingId, status }: { listingId: string; status: string }) {
   const [isPending, startTransition] = useTransition();
@@ -15,19 +13,19 @@ export function ListingStatusControls({ listingId, status }: { listingId: string
   return (
     <div className="flex gap-2">
       {status !== "PUBLISHED" && (
-        <button type="button" disabled={isPending} onClick={() => set("PUBLISHED")} className={btnClass}>
+        <Button variant="secondary" size="sm" disabled={isPending} onClick={() => set("PUBLISHED")}>
           Publish
-        </button>
+        </Button>
       )}
       {status === "PUBLISHED" && (
-        <button type="button" disabled={isPending} onClick={() => set("DRAFT")} className={btnClass}>
+        <Button variant="secondary" size="sm" disabled={isPending} onClick={() => set("DRAFT")}>
           Unpublish
-        </button>
+        </Button>
       )}
       {status !== "ARCHIVED" && (
-        <button type="button" disabled={isPending} onClick={() => set("ARCHIVED")} className={btnClass}>
+        <Button variant="secondary" size="sm" disabled={isPending} onClick={() => set("ARCHIVED")}>
           Archive
-        </button>
+        </Button>
       )}
     </div>
   );
