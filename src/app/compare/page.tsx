@@ -46,7 +46,7 @@ export default async function ComparePage({
             key={i}
             name={`slot${i}`}
             defaultValue={params[`slot${i}`] ?? ""}
-            className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm"
+            className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm"
           >
             <option value="">Slot {i + 1}: choose a listing</option>
             {allListings.map((l) => (
@@ -56,7 +56,7 @@ export default async function ComparePage({
             ))}
           </select>
         ))}
-        <button type="submit" className="rounded-md bg-[var(--color-navy)] px-4 py-2 text-sm font-semibold text-white sm:col-span-3 sm:w-fit">
+        <button type="submit" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white sm:col-span-3 sm:w-fit">
           Compare
         </button>
       </form>

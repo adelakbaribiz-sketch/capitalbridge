@@ -36,6 +36,8 @@ size, geography) drove the number, not a black-box "AI recommendation."
 - Admin: moderate any listing, view all users
 - Concept-preview screens (clearly labeled, non-functional) for auction/bidding and AI contract
   drafting — showing product thinking without faking legal/financial functionality
+- Light and dark themes — follows the OS setting by default, with a toggle in the header (in the
+  menu on phones); the choice is remembered per browser
 - Full documentation set in [`docs/`](docs) — see the index below
 
 ## Screenshots
@@ -56,7 +58,8 @@ size, geography) drove the number, not a black-box "AI recommendation."
   <img src="docs/screenshots/mobile.png" alt="Browse listings on a phone-sized screen" width="260">
 </p>
 
-*Phone-sized screen (390 px wide).*
+*Phone-sized screen (390 px wide). Screenshots use the dark theme; the app also has a light theme
+(toggle in the header, or it follows your OS setting).*
 
 All of these are real screenshots of the app running locally, not mockups. The investor dashboard
 and the match-score view at the top of this README were captured signed in as the seeded demo

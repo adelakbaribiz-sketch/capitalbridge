@@ -12,7 +12,7 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="border-b border-[var(--color-border)] bg-[var(--color-navy)] text-white">
+      <section className="border-b border-[var(--color-border)] bg-[var(--color-hero)] text-white">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <span className="inline-flex items-center rounded-full border border-white/20 px-3 py-1 text-xs font-medium uppercase tracking-wide text-white/70">
             Portfolio demo — not a real fundraising platform
@@ -27,7 +27,7 @@ export default async function HomePage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/signup"
-              className="rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-[var(--color-navy)] transition hover:bg-white/90"
+              className="rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-[var(--color-hero)] transition hover:bg-white/90"
             >
               Create an account
             </Link>

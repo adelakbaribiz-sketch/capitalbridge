@@ -23,7 +23,7 @@ export default function ContractsConceptPage() {
               key={t}
               className={`rounded-full border px-3 py-1 text-xs ${
                 i === 1
-                  ? "border-[var(--color-navy)] bg-[var(--color-navy)] text-white"
+                  ? "border-[var(--color-navy-fill)] bg-[var(--color-navy-fill)] text-white"
                   : "border-[var(--color-border)] text-[var(--color-ink-muted)]"
               }`}
             >

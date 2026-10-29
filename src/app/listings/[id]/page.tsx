@@ -145,7 +145,7 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
                 </div>
                 <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-slate-soft)]">
                   <div
-                    className="h-full rounded-full bg-[var(--color-navy)]"
+                    className="h-full rounded-full bg-[var(--color-navy-fill)]"
                     style={{ width: `${(f.points / f.maxPoints) * 100}%` }}
                   />
                 </div>

@@ -25,7 +25,7 @@ export default function SignupPage() {
               key={r}
               className={`cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium transition ${
                 role === r
-                  ? "border-[var(--color-navy)] bg-[var(--color-navy)] text-white"
+                  ? "border-[var(--color-navy-fill)] bg-[var(--color-navy-fill)] text-white"
                   : "border-[var(--color-border)] text-[var(--color-ink)]"
               }`}
             >
@@ -50,7 +50,7 @@ export default function SignupPage() {
             id="name"
             name="name"
             required
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
+            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
           />
         </div>
         <div>
@@ -62,7 +62,7 @@ export default function SignupPage() {
             name="email"
             type="email"
             required
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
+            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
           />
         </div>
         <div>
@@ -75,7 +75,7 @@ export default function SignupPage() {
             type="password"
             required
             minLength={8}
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
+            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
           />
           <p className="mt-1 text-xs text-[var(--color-ink-muted)]">At least 8 characters.</p>
         </div>
@@ -83,7 +83,7 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={pending}
-          className="w-full rounded-md bg-[var(--color-navy)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
+          className="w-full rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
         >
           {pending ? "Creating account…" : "Create account"}
         </button>

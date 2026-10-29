@@ -6,7 +6,7 @@ import { SECTOR_TIER1, SECTOR_TIER2, STAGES, RAISE_TYPES, GEOGRAPHIES, type Sect
 import { FormError } from "@/components/ui";
 
 const inputClass =
-  "mt-1 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]";
+  "mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]";
 const labelClass = "text-sm font-medium text-[var(--color-ink)]";
 
 export default function NewListingPage() {
@@ -86,7 +86,7 @@ export default function NewListingPage() {
             {SECTOR_TIER2[tier1].map((tag) => (
               <label
                 key={tag}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1 text-xs has-[:checked]:border-[var(--color-navy)] has-[:checked]:bg-[var(--color-navy)] has-[:checked]:text-white"
+                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1 text-xs has-[:checked]:border-[var(--color-navy-fill)] has-[:checked]:bg-[var(--color-navy-fill)] has-[:checked]:text-white"
               >
                 <input type="checkbox" name="sectorTier2" value={tag} className="sr-only" />
                 {tag}
@@ -162,7 +162,7 @@ export default function NewListingPage() {
           <button
             type="submit"
             onClick={() => setIntent("publish")}
-            className="rounded-md bg-[var(--color-navy)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]"
+            className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]"
           >
             Publish listing
           </button>
