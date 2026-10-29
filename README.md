@@ -1,5 +1,7 @@
 # CapitalBridge
 
+**Founder ⇄ investor matching with a transparent score: every match shows exactly which factors drove it.**
+
 > **Portfolio demo, not a real fundraising platform.** No real company, investor, capital raise,
 > or regulatory license exists here. See [docs/LIMITATIONS.md](docs/LIMITATIONS.md) for the full
 > honest-status breakdown, or visit `/docs-limitations` in the running app.
@@ -49,6 +51,10 @@ size, geography) drove the number, not a black-box "AI recommendation."
 | Investor dashboard (signed in) |
 |---|
 | ![Investor dashboard with top matches ranked against the investor's thesis](docs/screenshots/investor-dashboard.png) |
+
+| Mobile | 
+|---|
+| <img src="docs/screenshots/mobile.png" alt="Browse listings on a phone-sized screen" width="260"> |
 
 All of these are real screenshots of the app running locally, not mockups. The investor dashboard
 and the match-score view at the top of this README were captured signed in as the seeded demo
