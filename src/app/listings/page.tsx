@@ -80,9 +80,9 @@ export default async function ListingsPage({
           name="q"
           defaultValue={params.q ?? ""}
           placeholder="Search company or keyword"
-          className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)] sm:col-span-2"
+          className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)] sm:col-span-2"
         />
-        <select name="sector" defaultValue={params.sector ?? ""} className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm">
+        <select name="sector" defaultValue={params.sector ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
           <option value="">All sectors</option>
           {SECTOR_TIER1.map((s) => (
             <option key={s} value={s}>
@@ -90,7 +90,7 @@ export default async function ListingsPage({
             </option>
           ))}
         </select>
-        <select name="stage" defaultValue={params.stage ?? ""} className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm">
+        <select name="stage" defaultValue={params.stage ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
           <option value="">All stages</option>
           {STAGES.map((s) => (
             <option key={s.value} value={s.value}>
@@ -98,7 +98,7 @@ export default async function ListingsPage({
             </option>
           ))}
         </select>
-        <select name="geography" defaultValue={params.geography ?? ""} className="rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm">
+        <select name="geography" defaultValue={params.geography ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
           <option value="">All geographies</option>
           {GEOGRAPHIES.map((g) => (
             <option key={g} value={g}>
@@ -107,7 +107,7 @@ export default async function ListingsPage({
           ))}
         </select>
         <div className="flex gap-2 sm:col-span-5">
-          <button type="submit" className="rounded-md bg-[var(--color-navy)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
+          <button type="submit" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
             Apply filters
           </button>
           {activeFilterCount > 0 && (

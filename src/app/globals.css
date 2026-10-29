@@ -25,6 +25,36 @@
   --color-rose: #9c3b3b;
   --color-rose-soft: #f4e3e1;
   --color-slate-soft: #eceef2;
+  /* Navy is both an ink and a fill. In light mode they're the same color;
+     in dark mode text needs a light blue but filled buttons need a blue
+     that still carries white text, so fills get their own token. */
+  --color-navy-fill: #0b1e36;
+  --color-hero: #0b1e36;
+}
+
+/*
+  Dark theme: same identity on a deep blue-black "night paper". Set by the
+  inline script in layout.tsx (stored choice, else the OS preference) before
+  first paint, so there's no light flash.
+*/
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #0f1620;
+  --color-paper-raised: #17212e;
+  --color-ink: #eef1f6;
+  --color-ink-muted: #9aa7ba;
+  --color-navy: #8fb3ee;
+  --color-navy-soft: #3d6fbf;
+  --color-navy-fill: #2f5ea8;
+  --color-hero: #14263f;
+  --color-border: #2a3542;
+  --color-emerald: #4fcf9e;
+  --color-emerald-soft: #163229;
+  --color-amber: #e0ab52;
+  --color-amber-soft: #33280f;
+  --color-rose: #e08585;
+  --color-rose-soft: #3a2020;
+  --color-slate-soft: #202a37;
 }
 
 @theme inline {
@@ -42,6 +72,8 @@
   --color-rose: var(--color-rose);
   --color-rose-soft: var(--color-rose-soft);
   --color-slate-soft: var(--color-slate-soft);
+  --color-navy-fill: var(--color-navy-fill);
+  --color-hero: var(--color-hero);
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-inter);
 }

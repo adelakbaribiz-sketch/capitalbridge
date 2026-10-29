@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -23,7 +24,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} h-full antialiased`}>
+    // suppressHydrationWarning: the inline theme script sets data-theme on
+    // <html> before React hydrates, which React would otherwise flag.
+    <html lang="en" className={`${fraunces.variable} ${inter.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="flex min-h-full flex-col bg-[var(--color-paper)] text-[var(--color-ink)]">
         <SiteHeader />
         <main className="flex-1">{children}</main>

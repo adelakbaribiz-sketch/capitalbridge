@@ -48,7 +48,7 @@ export default async function FounderDashboardPage() {
             Views and interest below are real counts from this database, not seeded numbers.
           </p>
         </div>
-        <Link href="/listings/new" className="rounded-md bg-[var(--color-navy)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
+        <Link href="/listings/new" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
           New listing
         </Link>
       </div>
@@ -76,7 +76,7 @@ export default async function FounderDashboardPage() {
               title="No listings yet"
               description="Publish your first raise to start appearing in investor searches and match feeds."
               action={
-                <Link href="/listings/new" className="rounded-md bg-[var(--color-navy)] px-4 py-2 text-sm font-semibold text-white">
+                <Link href="/listings/new" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white">
                   Create a listing
                 </Link>
               }

@@ -15,9 +15,9 @@ export type InvestorProfileFormValues = {
 };
 
 const chipClass =
-  "flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1 text-xs has-[:checked]:border-[var(--color-navy)] has-[:checked]:bg-[var(--color-navy)] has-[:checked]:text-white";
+  "flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1 text-xs has-[:checked]:border-[var(--color-navy-fill)] has-[:checked]:bg-[var(--color-navy-fill)] has-[:checked]:text-white";
 const inputClass =
-  "mt-1 w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]";
+  "mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]";
 
 export function InvestorProfileForm({ initial, welcome }: { initial: InvestorProfileFormValues; welcome?: boolean }) {
   const [state, formAction] = useActionState(updateInvestorProfileAction, undefined);
@@ -108,7 +108,7 @@ export function InvestorProfileForm({ initial, welcome }: { initial: InvestorPro
         </div>
       </div>
 
-      <button type="submit" className="rounded-md bg-[var(--color-navy)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
+      <button type="submit" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
         Save profile
       </button>
     </form>

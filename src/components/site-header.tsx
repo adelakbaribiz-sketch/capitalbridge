@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
 import { MobileNav } from "@/components/mobile-nav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_LINKS = [{ href: "/listings", label: "Browse listings" }, { href: "/compare", label: "Compare" }];
 
@@ -44,6 +45,10 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3 text-sm">
+          {/* On phones the header row is already full; the toggle lives in the mobile menu there. */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
           {session ? (
             <>
               <span className="hidden text-[var(--color-ink-muted)] sm:inline">
@@ -65,7 +70,7 @@ export async function SiteHeader() {
               </Link>
               <Link
                 href="/signup"
-                className="rounded-md bg-[var(--color-navy)] px-3 py-1.5 font-medium text-white transition hover:bg-[var(--color-navy-soft)]"
+                className="rounded-md bg-[var(--color-navy-fill)] px-3 py-1.5 font-medium text-white transition hover:bg-[var(--color-navy-soft)]"
               >
                 Get started
               </Link>

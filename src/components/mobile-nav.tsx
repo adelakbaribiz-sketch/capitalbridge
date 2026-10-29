@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function MobileNav({
   links,
@@ -49,6 +50,10 @@ export function MobileNav({
                 </Link>
               </li>
             )}
+            <li className="flex items-center justify-between border-t border-[var(--color-border)] pt-3">
+              <span className="font-medium text-[var(--color-ink)]">Theme</span>
+              <ThemeToggle />
+            </li>
           </ul>
         </nav>
       )}

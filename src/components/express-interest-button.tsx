@@ -25,7 +25,7 @@ export function ExpressInterestButton({
       type="button"
       disabled={isPending}
       onClick={() => startTransition(() => expressInterestAction(listingId))}
-      className="rounded-md bg-[var(--color-navy)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
+      className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
     >
       {isPending ? "Recording…" : "Express interest"}
     </button>
