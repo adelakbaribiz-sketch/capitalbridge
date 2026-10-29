@@ -1,5 +1,7 @@
 # CapitalBridge
 
+**Founder ⇄ investor matching with a transparent score: every match shows exactly which factors drove it.**
+
 > **Portfolio demo, not a real fundraising platform.** No real company, investor, capital raise,
 > or regulatory license exists here. See [docs/LIMITATIONS.md](docs/LIMITATIONS.md) for the full
 > honest-status breakdown, or visit `/docs-limitations` in the running app.
@@ -7,6 +9,8 @@
 A founder ⇄ investor marketplace MVP: founders publish structured fundraising listings, investors
 set an investment thesis and get a transparent, explainable compatibility score against every
 listing, browse/filter/compare, and record interest.
+
+![Explainable match score — sector, stage, check-size and geography fit for one listing](docs/screenshots/match-breakdown.png)
 
 Built from a Technical Project Dossier for "CapitalBridge" — see
 [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md) for how a 20-feature, multi-jurisdiction
@@ -44,10 +48,21 @@ size, geography) drove the number, not a black-box "AI recommendation."
 |---|---|
 | ![Listing detail](docs/screenshots/listing-detail.png) | ![Compare](docs/screenshots/compare.png) |
 
-These four are the signed-out views (real screenshots, not mockups). The match-score
-breakdown, founder dashboard, investor dashboard, and admin panel only render for a signed-in
-session, so they aren't captured here — see [docs/DEMO.md](docs/DEMO.md) to see them live in
-under a minute with the seeded demo accounts.
+| Investor dashboard (signed in) |
+|---|
+| ![Investor dashboard with top matches ranked against the investor's thesis](docs/screenshots/investor-dashboard.png) |
+
+<p>
+  <img src="docs/screenshots/mobile.png" alt="Browse listings on a phone-sized screen" width="260">
+</p>
+
+*Phone-sized screen (390 px wide).*
+
+All of these are real screenshots of the app running locally, not mockups. The investor dashboard
+and the match-score view at the top of this README were captured signed in as the seeded demo
+investor; every company, investor and number is fictional seed data.
+The founder dashboard and admin panel are not pictured — see [docs/DEMO.md](docs/DEMO.md) to see
+them live in under a minute with the seeded demo accounts.
 
 ## Architecture
 
