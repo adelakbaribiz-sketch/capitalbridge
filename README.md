@@ -52,9 +52,11 @@ size, geography) drove the number, not a black-box "AI recommendation."
 |---|
 | ![Investor dashboard with top matches ranked against the investor's thesis](docs/screenshots/investor-dashboard.png) |
 
-| Mobile | 
-|---|
-| <img src="docs/screenshots/mobile.png" alt="Browse listings on a phone-sized screen" width="260"> |
+<p>
+  <img src="docs/screenshots/mobile.png" alt="Browse listings on a phone-sized screen" width="260">
+</p>
+
+*Phone-sized screen (390 px wide).*
 
 All of these are real screenshots of the app running locally, not mockups. The investor dashboard
 and the match-score view at the top of this README were captured signed in as the seeded demo
