@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { decodeList } from "@/lib/json-list";
@@ -6,6 +5,8 @@ import { computeMatchScore } from "@/lib/match";
 import { SECTOR_TIER1, STAGES, GEOGRAPHIES } from "@/lib/taxonomy";
 import { ListingCard } from "@/components/listing-card";
 import { EmptyState } from "@/components/ui";
+import { SelectField, TextField } from "@/components/design-system/field";
+import { Button, ButtonLink } from "@/components/design-system/button";
 import type { Prisma } from "@prisma/client";
 
 export default async function ListingsPage({
@@ -75,45 +76,43 @@ export default async function ListingsPage({
       </div>
 
       <form method="get" className="mt-6 grid gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)] p-4 sm:grid-cols-5">
-        <input
+        <TextField
           type="search"
           name="q"
           defaultValue={params.q ?? ""}
           placeholder="Search company or keyword"
-          className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)] sm:col-span-2"
+          wrapperClassName="sm:col-span-2"
         />
-        <select name="sector" defaultValue={params.sector ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
+        <SelectField name="sector" defaultValue={params.sector ?? ""}>
           <option value="">All sectors</option>
           {SECTOR_TIER1.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
           ))}
-        </select>
-        <select name="stage" defaultValue={params.stage ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
+        </SelectField>
+        <SelectField name="stage" defaultValue={params.stage ?? ""}>
           <option value="">All stages</option>
           {STAGES.map((s) => (
             <option key={s.value} value={s.value}>
               {s.label}
             </option>
           ))}
-        </select>
-        <select name="geography" defaultValue={params.geography ?? ""} className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm">
+        </SelectField>
+        <SelectField name="geography" defaultValue={params.geography ?? ""}>
           <option value="">All geographies</option>
           {GEOGRAPHIES.map((g) => (
             <option key={g} value={g}>
               {g}
             </option>
           ))}
-        </select>
+        </SelectField>
         <div className="flex gap-2 sm:col-span-5">
-          <button type="submit" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]">
-            Apply filters
-          </button>
+          <Button type="submit">Apply filters</Button>
           {activeFilterCount > 0 && (
-            <Link href="/listings" className="rounded-md border border-[var(--color-border)] px-4 py-2 text-sm font-medium text-[var(--color-ink)]">
+            <ButtonLink href="/listings" variant="secondary">
               Clear
-            </Link>
+            </ButtonLink>
           )}
         </div>
       </form>

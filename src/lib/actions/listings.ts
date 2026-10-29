@@ -105,7 +105,7 @@ export async function expressInterestAction(listingId: string) {
     prisma.listing.findUnique({ where: { id: listingId } }),
     prisma.investorProfile.findUnique({ where: { userId: session.userId } }),
   ]);
-  if (!listing) throw new Error("NOT_FOUND");
+  if (!listing || listing.status !== "PUBLISHED") throw new Error("NOT_FOUND");
   if (!profile) throw new Error("Set up your investor profile before expressing interest.");
 
   const { score } = computeMatchScore({

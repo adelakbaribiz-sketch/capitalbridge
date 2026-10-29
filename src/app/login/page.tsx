@@ -4,6 +4,9 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { loginAction } from "@/lib/actions/auth";
 import { FormError } from "@/components/ui";
+import { TextField } from "@/components/design-system/field";
+import { Button } from "@/components/design-system/button";
+import { ElevatedSurface } from "@/components/design-system/surface";
 
 const DEMO_ACCOUNTS = [
   { role: "Founder", email: "dana@arclight.demo" },
@@ -20,37 +23,11 @@ export default function LoginPage() {
         <h1 className="font-display text-3xl text-[var(--color-navy)]">Sign in</h1>
         <form action={formAction} className="mt-6 space-y-4">
           <FormError message={state?.error} />
-          <div>
-            <label htmlFor="email" className="text-sm font-medium text-[var(--color-ink)]">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="text-sm font-medium text-[var(--color-ink)]">
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={pending}
-            className="w-full rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
-          >
+          <TextField label="Email" id="email" name="email" type="email" required />
+          <TextField label="Password" id="password" name="password" type="password" required />
+          <Button type="submit" disabled={pending} className="w-full">
             {pending ? "Signing in…" : "Sign in"}
-          </button>
+          </Button>
         </form>
         <p className="mt-4 text-sm text-[var(--color-ink-muted)]">
           No account?{" "}
@@ -60,7 +37,8 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <div className="rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)] p-5">
+      {/* Elevated: this panel is the thing a first-time demo visitor most needs to notice. */}
+      <ElevatedSurface className="p-5">
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-muted)]">
           Demo credentials
         </p>
@@ -75,7 +53,7 @@ export default function LoginPage() {
             </li>
           ))}
         </ul>
-      </div>
+      </ElevatedSurface>
     </div>
   );
 }

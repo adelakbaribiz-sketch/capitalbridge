@@ -32,8 +32,18 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
 
   let match = null;
   let existingInterest = null;
-  if (session?.role === "INVESTOR") {
-    const profile = await prisma.investorProfile.findUnique({ where: { userId: session.userId } });
+  const investorId = session?.role === "INVESTOR" ? session.userId : null;
+  const [profileRow, interestRow, viewCount, interestCount] = await Promise.all([
+    investorId ? prisma.investorProfile.findUnique({ where: { userId: investorId } }) : null,
+    investorId
+      ? prisma.interest.findUnique({ where: { listingId_investorId: { listingId: listing.id, investorId } } })
+      : null,
+    prisma.listingView.count({ where: { listingId: listing.id } }),
+    prisma.interest.count({ where: { listingId: listing.id, status: "INTERESTED" } }),
+  ]);
+  existingInterest = interestRow;
+  if (investorId) {
+    const profile = profileRow;
     if (profile) {
       match = computeMatchScore({
         investor: {
@@ -51,14 +61,9 @@ export default async function ListingDetailPage({ params }: { params: Promise<{ 
         },
       });
     }
-    existingInterest = await prisma.interest.findUnique({
-      where: { listingId_investorId: { listingId: listing.id, investorId: session.userId } },
-    });
   }
 
   const tier2 = decodeList(listing.sectorTier2Json);
-  const viewCount = await prisma.listingView.count({ where: { listingId: listing.id } });
-  const interestCount = await prisma.interest.count({ where: { listingId: listing.id, status: "INTERESTED" } });
 
   return (
     <div className="mx-auto max-w-4xl px-6 py-12">

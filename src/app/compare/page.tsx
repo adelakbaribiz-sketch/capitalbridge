@@ -2,6 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { stageLabel, raiseTypeLabel } from "@/lib/taxonomy";
 import { formatUsdCompact } from "@/components/ui";
 import { decodeList } from "@/lib/json-list";
+import { SelectField } from "@/components/design-system/field";
+import { Button } from "@/components/design-system/button";
+import { Surface } from "@/components/design-system/surface";
 
 const SLOTS = 3;
 
@@ -40,29 +43,24 @@ export default async function ComparePage({
         Pick up to {SLOTS} published listings to compare side by side. The URL is shareable.
       </p>
 
-      <form method="get" className="mt-6 grid gap-3 sm:grid-cols-3">
+      <form method="get" className="mt-6 grid gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)] p-4 sm:grid-cols-3">
         {Array.from({ length: SLOTS }, (_, i) => (
-          <select
-            key={i}
-            name={`slot${i}`}
-            defaultValue={params[`slot${i}`] ?? ""}
-            className="rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm"
-          >
+          <SelectField key={i} name={`slot${i}`} defaultValue={params[`slot${i}`] ?? ""}>
             <option value="">Slot {i + 1}: choose a listing</option>
             {allListings.map((l) => (
               <option key={l.id} value={l.id}>
                 {l.companyName}
               </option>
             ))}
-          </select>
+          </SelectField>
         ))}
-        <button type="submit" className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2 text-sm font-semibold text-white sm:col-span-3 sm:w-fit">
+        <Button type="submit" className="sm:col-span-3 sm:w-fit">
           Compare
-        </button>
+        </Button>
       </form>
 
       {orderedSelected.length > 0 ? (
-        <div className="mt-8 overflow-x-auto rounded-lg border border-[var(--color-border)] bg-[var(--color-paper-raised)]">
+        <Surface className="mt-8 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--color-border)]">
@@ -87,7 +85,7 @@ export default async function ComparePage({
               ))}
             </tbody>
           </table>
-        </div>
+        </Surface>
       ) : (
         <p className="mt-10 text-sm text-[var(--color-ink-muted)]">Choose at least one listing above to compare.</p>
       )}

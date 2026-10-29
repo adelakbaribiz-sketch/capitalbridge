@@ -4,10 +4,8 @@ import { useActionState, useState } from "react";
 import { createListingAction } from "@/lib/actions/listings";
 import { SECTOR_TIER1, SECTOR_TIER2, STAGES, RAISE_TYPES, GEOGRAPHIES, type SectorTier1 } from "@/lib/taxonomy";
 import { FormError } from "@/components/ui";
-
-const inputClass =
-  "mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]";
-const labelClass = "text-sm font-medium text-[var(--color-ink)]";
+import { TextField, TextareaField, SelectField, Chip } from "@/components/design-system/field";
+import { Button } from "@/components/design-system/button";
 
 export default function NewListingPage() {
   const [state, formAction] = useActionState(createListingAction, undefined);
@@ -26,146 +24,89 @@ export default function NewListingPage() {
         <FormError message={state?.error} />
         <input type="hidden" name="intent" value={intent} />
 
-        <div>
-          <label className={labelClass} htmlFor="companyName">
-            Company name
-          </label>
-          <input id="companyName" name="companyName" required className={inputClass} />
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="tagline">
-            One-line tagline
-          </label>
-          <input id="tagline" name="tagline" required maxLength={160} className={inputClass} />
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="description">
-            Description
-          </label>
-          <textarea id="description" name="description" required rows={6} className={inputClass} />
-        </div>
+        <TextField label="Company name" id="companyName" name="companyName" required />
+        <TextField label="One-line tagline" id="tagline" name="tagline" required maxLength={160} />
+        <TextareaField label="Description" id="description" name="description" required rows={6} />
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass} htmlFor="sectorTier1">
-              Primary sector
-            </label>
-            <select
-              id="sectorTier1"
-              name="sectorTier1"
-              value={tier1}
-              onChange={(e) => setTier1(e.target.value as SectorTier1)}
-              className={inputClass}
-            >
-              {SECTOR_TIER1.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className={labelClass} htmlFor="stage">
-              Stage
-            </label>
-            <select id="stage" name="stage" className={inputClass}>
-              {STAGES.map((s) => (
-                <option key={s.value} value={s.value}>
-                  {s.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          <SelectField
+            label="Primary sector"
+            id="sectorTier1"
+            name="sectorTier1"
+            value={tier1}
+            onChange={(e) => setTier1(e.target.value as SectorTier1)}
+          >
+            {SECTOR_TIER1.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </SelectField>
+          <SelectField label="Stage" id="stage" name="stage">
+            {STAGES.map((s) => (
+              <option key={s.value} value={s.value}>
+                {s.label}
+              </option>
+            ))}
+          </SelectField>
         </div>
 
         <fieldset>
-          <legend className={labelClass}>Sub-sector tags (optional, up to 6)</legend>
+          <legend className="text-sm font-medium text-[var(--color-ink)]">Sub-sector tags (optional, up to 6)</legend>
           <div className="mt-2 flex flex-wrap gap-2">
             {SECTOR_TIER2[tier1].map((tag) => (
-              <label
-                key={tag}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--color-border)] px-3 py-1 text-xs has-[:checked]:border-[var(--color-navy-fill)] has-[:checked]:bg-[var(--color-navy-fill)] has-[:checked]:text-white"
-              >
-                <input type="checkbox" name="sectorTier2" value={tag} className="sr-only" />
+              <Chip key={tag} name="sectorTier2" value={tag}>
                 {tag}
-              </label>
+              </Chip>
             ))}
           </div>
         </fieldset>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass} htmlFor="raiseType">
-              Instrument
-            </label>
-            <select id="raiseType" name="raiseType" className={inputClass}>
-              {RAISE_TYPES.map((r) => (
-                <option key={r.value} value={r.value}>
-                  {r.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className={labelClass} htmlFor="askAmountUsd">
-              Raise amount (USD)
-            </label>
-            <input id="askAmountUsd" name="askAmountUsd" type="number" min={10000} step={1000} required className={inputClass} />
-          </div>
+          <SelectField label="Instrument" id="raiseType" name="raiseType">
+            {RAISE_TYPES.map((r) => (
+              <option key={r.value} value={r.value}>
+                {r.label}
+              </option>
+            ))}
+          </SelectField>
+          <TextField
+            label="Raise amount (USD)"
+            id="askAmountUsd"
+            name="askAmountUsd"
+            type="number"
+            min={10000}
+            step={1000}
+            required
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className={labelClass} htmlFor="geography">
-              Primary geography
-            </label>
-            <select id="geography" name="geography" className={inputClass}>
-              {GEOGRAPHIES.map((g) => (
-                <option key={g} value={g}>
-                  {g}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className={labelClass} htmlFor="teamSize">
-              Team size (optional)
-            </label>
-            <input id="teamSize" name="teamSize" type="number" min={1} className={inputClass} />
-          </div>
+          <SelectField label="Primary geography" id="geography" name="geography">
+            {GEOGRAPHIES.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </SelectField>
+          <TextField label="Team size (optional)" id="teamSize" name="teamSize" type="number" min={1} />
         </div>
 
-        <div>
-          <label className={labelClass} htmlFor="tractionSummary">
-            Traction summary (optional)
-          </label>
-          <input id="tractionSummary" name="tractionSummary" placeholder="e.g. $40K MRR, 18% MoM growth" className={inputClass} />
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="websiteUrl">
-            Website (optional)
-          </label>
-          <input id="websiteUrl" name="websiteUrl" type="url" placeholder="https://" className={inputClass} />
-        </div>
+        <TextField
+          label="Traction summary (optional)"
+          id="tractionSummary"
+          name="tractionSummary"
+          placeholder="e.g. $40K MRR, 18% MoM growth"
+        />
+        <TextField label="Website (optional)" id="websiteUrl" name="websiteUrl" type="url" placeholder="https://" />
 
         <div className="flex gap-3 pt-2">
-          <button
-            type="submit"
-            onClick={() => setIntent("draft")}
-            className="rounded-md border border-[var(--color-border)] px-4 py-2.5 text-sm font-semibold text-[var(--color-ink)] hover:border-[var(--color-navy)]"
-          >
+          <Button type="submit" variant="secondary" onClick={() => setIntent("draft")}>
             Save as draft
-          </button>
-          <button
-            type="submit"
-            onClick={() => setIntent("publish")}
-            className="rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[var(--color-navy-soft)]"
-          >
+          </Button>
+          <Button type="submit" onClick={() => setIntent("publish")}>
             Publish listing
-          </button>
+          </Button>
         </div>
       </form>
     </div>

@@ -4,6 +4,8 @@ import { useActionState, useState } from "react";
 import Link from "next/link";
 import { signupAction } from "@/lib/actions/auth";
 import { FormError } from "@/components/ui";
+import { TextField } from "@/components/design-system/field";
+import { Button } from "@/components/design-system/button";
 
 export default function SignupPage() {
   const [state, formAction, pending] = useActionState(signupAction, undefined);
@@ -23,7 +25,7 @@ export default function SignupPage() {
           {(["FOUNDER", "INVESTOR"] as const).map((r) => (
             <label
               key={r}
-              className={`cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium transition ${
+              className={`cursor-pointer rounded-md border px-3 py-2 text-center text-sm font-medium transition-colors duration-[var(--motion-fast)] ${
                 role === r
                   ? "border-[var(--color-navy-fill)] bg-[var(--color-navy-fill)] text-white"
                   : "border-[var(--color-border)] text-[var(--color-ink)]"
@@ -42,51 +44,21 @@ export default function SignupPage() {
           ))}
         </fieldset>
 
-        <div>
-          <label htmlFor="name" className="text-sm font-medium text-[var(--color-ink)]">
-            Full name
-          </label>
-          <input
-            id="name"
-            name="name"
-            required
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="text-sm font-medium text-[var(--color-ink)]">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="text-sm font-medium text-[var(--color-ink)]">
-            Password
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            minLength={8}
-            className="mt-1 w-full rounded-md border border-[var(--color-border)] bg-[var(--color-paper-raised)] px-3 py-2 text-sm outline-none focus:border-[var(--color-navy)]"
-          />
-          <p className="mt-1 text-xs text-[var(--color-ink-muted)]">At least 8 characters.</p>
-        </div>
+        <TextField label="Full name" id="name" name="name" required />
+        <TextField label="Email" id="email" name="email" type="email" required />
+        <TextField
+          label="Password"
+          id="password"
+          name="password"
+          type="password"
+          required
+          minLength={8}
+          hint="At least 8 characters."
+        />
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="w-full rounded-md bg-[var(--color-navy-fill)] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-navy-soft)] disabled:opacity-60"
-        >
+        <Button type="submit" disabled={pending} className="w-full">
           {pending ? "Creating account…" : "Create account"}
-        </button>
+        </Button>
       </form>
 
       <p className="mt-4 text-sm text-[var(--color-ink-muted)]">

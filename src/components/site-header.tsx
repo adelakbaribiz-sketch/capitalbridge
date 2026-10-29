@@ -3,6 +3,7 @@ import { getSession } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Button, ButtonLink } from "@/components/design-system/button";
 
 const NAV_LINKS = [{ href: "/listings", label: "Browse listings" }, { href: "/compare", label: "Compare" }];
 
@@ -55,12 +56,9 @@ export async function SiteHeader() {
                 {session.name} · {session.role.toLowerCase()}
               </span>
               <form action={logoutAction}>
-                <button
-                  type="submit"
-                  className="rounded-md border border-[var(--color-border)] px-3 py-1.5 font-medium text-[var(--color-ink)] transition hover:border-[var(--color-navy)]"
-                >
+                <Button type="submit" variant="secondary" size="sm">
                   Sign out
-                </button>
+                </Button>
               </form>
             </>
           ) : (
@@ -68,12 +66,9 @@ export async function SiteHeader() {
               <Link href="/login" className="font-medium text-[var(--color-ink)] hover:underline">
                 Sign in
               </Link>
-              <Link
-                href="/signup"
-                className="rounded-md bg-[var(--color-navy-fill)] px-3 py-1.5 font-medium text-white transition hover:bg-[var(--color-navy-soft)]"
-              >
+              <ButtonLink href="/signup" size="sm">
                 Get started
-              </Link>
+              </ButtonLink>
             </>
           )}
         </div>
